@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:08:04 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 11:59:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/25 20:02:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,4 @@ void	ft_init(t_max *save)
 	save->suser = 0;
 	save->sgroup = 0;
 	save->ssize = 0;
-}
-
-void	ft_blocks(blkcnt_t block, int flag, t_max *save)
-{
-	if (flag == 0)
-		save->sblock += block;
-	else
-		return ;
 }

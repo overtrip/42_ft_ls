@@ -6,14 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:16 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 15:29:35 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/25 16:45:13 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_sort_cl(t_cl **begin, t_cl *new, int (*ft_comp)(t_cl *, t_cl *),
-		t_max *save)
+void	ft_sort_cl(t_cl **begin, t_cl *new, int (*ft_comp)(t_cl *, t_cl *))
 {
 	t_cl	*tmp;
 
@@ -28,7 +27,7 @@ void	ft_sort_cl(t_cl **begin, t_cl *new, int (*ft_comp)(t_cl *, t_cl *),
 	{
 		if (ft_comp(tmp->next, new) > 0)
 		{
-			ft_save_val(tmp, save);
+		//	ft_save_val(tmp, save);
 			new->next = tmp->next;
 			tmp->next = new;
 			return ;

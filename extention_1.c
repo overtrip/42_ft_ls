@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 15:07:12 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/25 16:11:41 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_check(t_cl *chain, t_max *save)
 	ft_search_user(chain->file->st_uid, save);
 	ft_search_groups(chain->file->st_gid, save);
 	ft_search_size(chain->file->st_size, save);
-	ft_blocks(chain->file->st_blocks, 1, save);
 	ft_search_date(&(chain->file->st_mtimespec), 0);
 	ft_putstr(chain->d_name);
 }

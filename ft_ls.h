@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 15:07:24 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/25 17:57:13 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct		s_cl
 
 t_cl				*ft_create_elem(struct stat *file, char *d_name);
 void				ft_sort_cl(t_cl **begin, t_cl *new,
-		int (*ft_comp)(t_cl *, t_cl *), t_max *save);
+		int (*ft_comp)(t_cl *, t_cl *));
 int					ft_comp_name(t_cl *file1, t_cl *file2);
 int					ft_rcomp_name(t_cl *file1, t_cl *file2);
 int					ft_comp_time(t_cl *file1, t_cl *file2);
@@ -55,8 +55,7 @@ int					ft_rcomp_time(t_cl *file1, t_cl *file2);
 int					ft_get_op(int argc, char **argv, int *start);
 void				ft_del_chain(t_cl **chain);
 void				ft_aff_list(int option, t_cl *chain, t_max *save);
-void				ft_sort_list(int option, t_cl *new, t_cl **chain,
-		t_max *save);
+void				ft_sort_list(int option, t_cl *new, t_cl **chain);
 void				ft_aff(char *d_name, int option, t_max *save);
 void				ft_printl(t_cl *chain, t_max *save);
 void				ft_print(t_cl *chain);
@@ -66,11 +65,12 @@ void				ft_search_size(off_t size, t_max *save);
 void				ft_search_groups(gid_t gid, t_max *save);
 void				ft_search_user(uid_t uid, t_max *save);
 void				ft_search_link(nlink_t link, t_max *save);
-void				ft_blocks(blkcnt_t block, int flag, t_max *save);
 void				ft_putspace(int nb);
 void				ft_search_right(mode_t mode);
 void				ft_wright(int mask);
 void				ft_optionr(t_cl *chain, t_max *save, int option);
-void				ft_save_val(t_cl *chain, t_max *save);
+void				ft_save_val(t_cl *chain, t_max *save, int option);
+unsigned int		ft_cmp_char(unsigned long nb);
+void				ft_init(t_max *save);
 
 #endif

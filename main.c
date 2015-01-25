@@ -6,12 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 15:01:05 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/25 20:02:00 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 int		ft_get_op(int argc, char **argv, int *start)
 {
@@ -62,7 +61,7 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save)
 {
 	if (option & LS_L)
 	{
-		ft_save_val(chain, save);
+		ft_save_val(chain, save, option);
 		ft_putstr("total ");
 		ft_putnbr(save->sblock);
 		ft_putchar('\n');
@@ -72,9 +71,7 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save)
 		if (option & LS_A || (*chain).d_name[0] != '.')
 		{
 			if (option & LS_L)
-			{
 				ft_printl(chain, save);
-			}
 			else
 				ft_print(chain);
 		}
@@ -82,19 +79,19 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save)
 	}
 }
 
-void	ft_sort_list(int option, t_cl *new, t_cl **chain, t_max *save)
+void	ft_sort_list(int option, t_cl *new, t_cl **chain)
 {
 	if (option & LS_T)
 	{
 		if (option & LS_REV)
-			ft_sort_cl(chain, new, &ft_rcomp_time, save);
+			ft_sort_cl(chain, new, &ft_rcomp_time);
 		else
-			ft_sort_cl(chain, new, &ft_comp_time, save);
+			ft_sort_cl(chain, new, &ft_comp_time);
 	}
 	else if (option & LS_REV)
-		ft_sort_cl(chain, new, &ft_rcomp_name, save);
+		ft_sort_cl(chain, new, &ft_rcomp_name);
 	else
-		ft_sort_cl(chain, new, &ft_comp_name, save);
+		ft_sort_cl(chain, new, &ft_comp_name);
 }
 
 void	ft_aff(char *d_name, int option, t_max *save)
@@ -106,6 +103,7 @@ void	ft_aff(char *d_name, int option, t_max *save)
 	t_cl			*new;
 
 	chain = NULL;
+	ft_init(save);
 	if ((tmp = opendir(d_name)))
 	{
 		while ((reading = readdir(tmp)))
@@ -115,7 +113,7 @@ void	ft_aff(char *d_name, int option, t_max *save)
 			if (lstat(reading->d_name, info) == -1)
 				return ;
 			new = ft_create_elem(info, reading->d_name);
-			ft_sort_list(option, new, &chain, save);
+			ft_sort_list(option, new, &chain);
 		}
 		ft_aff_list(option, chain, save);
 		if (option & LS_REC)
