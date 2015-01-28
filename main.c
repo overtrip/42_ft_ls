@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 20:02:00 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 17:45:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		ft_get_op(int argc, char **argv, int *start)
 	return (ret);
 }
 
-void	ft_aff_list(int option, t_cl *chain, t_max *save)
+void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 {
 	if (option & LS_L)
 	{
@@ -66,16 +66,21 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save)
 		ft_putnbr(save->sblock);
 		ft_putchar('\n');
 	}
-	while (chain)
+	if (ft_strequ(path, ".") || ((path = ft_strrchr(path, '/')) && path[1] != '.' ))
 	{
-		if (option & LS_A || (*chain).d_name[0] != '.')
+		while (chain)
 		{
-			if (option & LS_L)
-				ft_printl(chain, save);
-			else
-				ft_print(chain);
+			if (option & LS_A || (*chain).d_name[0] != '.')
+			{
+				if (option & LS_L)
+					ft_printl(chain, save);
+				else
+					ft_print(chain);
+			}
+			chain = chain->next;
 		}
-		chain = chain->next;
+		if (option & LS_REC)
+			ft_putchar('\n');
 	}
 }
 
@@ -100,7 +105,6 @@ void	ft_aff(char *d_name, int option, t_max *save)
 	struct dirent	*reading;
 	struct stat		*info;
 	t_cl			*chain;
-	t_cl			*new;
 
 	chain = NULL;
 	ft_init(save);
@@ -110,14 +114,20 @@ void	ft_aff(char *d_name, int option, t_max *save)
 		{
 			if (!(info = (struct stat *)malloc(sizeof(struct stat))))
 				return ;
-			if (lstat(reading->d_name, info) == -1)
+			if (lstat(ft_joinpath(reading->d_name,d_name), info) == -1)
 				return ;
-			new = ft_create_elem(info, reading->d_name);
-			ft_sort_list(option, new, &chain);
+			ft_sort_list(option, ft_create_elem(info, reading->d_name), &chain);
 		}
-		ft_aff_list(option, chain, save);
+		ft_aff_list(option, chain, save, d_name);
 		if (option & LS_REC)
-			ft_optionr(chain, save, option);
+		{
+			t_cl *current = chain->next;
+			while (current)
+			{
+				ft_optionr(current, save, option, d_name);
+				current = current->next;
+			}
+		}
 		closedir(tmp);
 	}
 }

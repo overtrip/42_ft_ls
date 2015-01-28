@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 17:57:13 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 17:10:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int					ft_comp_time(t_cl *file1, t_cl *file2);
 int					ft_rcomp_time(t_cl *file1, t_cl *file2);
 int					ft_get_op(int argc, char **argv, int *start);
 void				ft_del_chain(t_cl **chain);
-void				ft_aff_list(int option, t_cl *chain, t_max *save);
+void				ft_aff_list(int option, t_cl *chain, t_max *save, char *path);
 void				ft_sort_list(int option, t_cl *new, t_cl **chain);
 void				ft_aff(char *d_name, int option, t_max *save);
 void				ft_printl(t_cl *chain, t_max *save);
@@ -68,9 +68,10 @@ void				ft_search_link(nlink_t link, t_max *save);
 void				ft_putspace(int nb);
 void				ft_search_right(mode_t mode);
 void				ft_wright(int mask);
-void				ft_optionr(t_cl *chain, t_max *save, int option);
+void				ft_optionr(t_cl *chain, t_max *save, int option, char *path);
 void				ft_save_val(t_cl *chain, t_max *save, int option);
 unsigned int		ft_cmp_char(unsigned long nb);
 void				ft_init(t_max *save);
+char				*ft_joinpath(char *d_name, char* path);
 
 #endif

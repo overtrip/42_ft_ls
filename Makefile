@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/01/25 15:32:57 by jealonso         ###   ########.fr        #
+#    Updated: 2015/01/28 17:49:08 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,5 +39,10 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+
+cleanlib:
+	$(MAKE) clean -C libft
+
+cleanall: clean cleanlib
 
 re: fclean all

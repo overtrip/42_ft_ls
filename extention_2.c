@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:04:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 20:02:02 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 17:42:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,3 +51,15 @@ void	ft_save_val(t_cl *chain, t_max *save, int option)
 		chain = chain->next;
 	}
 }
+
+char	*ft_joinpath(char *d_name, char *path)
+{
+	if (!(path[ft_strlen(path) - 1] == '/'))
+		path = ft_strjoin(path, "/");
+	return (ft_strjoin(path, d_name));
+}
+/*
+char	*get_file()
+{
+
+}*/

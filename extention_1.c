@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 16:11:41 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 17:45:47 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_cl	*ft_create_elem(struct stat *file, char *d_name)
 	if (!(new = (t_cl *)malloc(sizeof(t_cl))))
 		return (NULL);
 	new->file = file;
-	new->d_name = d_name;
+	new->d_name = ft_strdup(d_name);
 	new->next = NULL;
 	return (new);
 }
@@ -48,12 +48,20 @@ void	ft_check(t_cl *chain, t_max *save)
 	ft_putstr(chain->d_name);
 }
 
-void	ft_optionr(t_cl *chain, t_max *save, int option)
+void	ft_optionr(t_cl *chain, t_max *save, int option, char *path)
 {
-	while ((chain = chain->next))
-		if ((chain->file->st_mode & S_IFMT) == S_IFDIR)
+	if ((chain->file->st_mode & S_IFMT) == S_IFDIR)
+	{
+		if ((chain->d_name[1] != '.'))
 		{
-			ft_aff(chain->d_name, option, save);
-			ft_putendl(chain->d_name);
+			path = ft_joinpath(chain->d_name, path);
+			if (((option & LS_A) && chain->d_name[0] == '.')
+					|| chain->d_name[0] != '.')
+			{
+				ft_putstr(path);
+				ft_putstr(":\n");
+			}
+			ft_aff(path, option, save);
 		}
+	}
 }
