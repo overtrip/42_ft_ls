@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 17:45:44 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 19:05:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,27 @@ int		ft_get_op(int argc, char **argv, int *start)
 	return (ret);
 }
 
+static void		ft_print_total(t_max *save)
+{
+	ft_putstr("total ");
+	ft_putnbr(save->sblock);
+	ft_putchar('\n');
+}
+
 void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 {
-	if (option & LS_L)
+	if (ft_strequ(path, ".") || ((path = ft_strrchr(path, '/'))
+				&& (path[1] != '.'  || option & LS_A)))
 	{
-		ft_save_val(chain, save, option);
-		ft_putstr("total ");
-		ft_putnbr(save->sblock);
-		ft_putchar('\n');
-	}
-	if (ft_strequ(path, ".") || ((path = ft_strrchr(path, '/')) && path[1] != '.' ))
-	{
+		if (option & LS_L)
+		{
+			ft_save_val(chain, save, option);
+			if (ft_printable(option, chain))
+				ft_print_total(save);
+		}
 		while (chain)
 		{
-			if (option & LS_A || (*chain).d_name[0] != '.')
+			if (option & LS_A || chain->d_name[0] != '.')
 			{
 				if (option & LS_L)
 					ft_printl(chain, save);
@@ -79,8 +86,6 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 			}
 			chain = chain->next;
 		}
-		if (option & LS_REC)
-			ft_putchar('\n');
 	}
 }
 

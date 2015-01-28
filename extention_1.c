@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 17:45:47 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 19:06:02 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_optionr(t_cl *chain, t_max *save, int option, char *path)
 			if (((option & LS_A) && chain->d_name[0] == '.')
 					|| chain->d_name[0] != '.')
 			{
+				ft_putchar('\n');
 				ft_putstr(path);
 				ft_putstr(":\n");
 			}

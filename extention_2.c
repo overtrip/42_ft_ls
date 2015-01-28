@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:04:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 17:42:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 18:58:23 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,23 @@ void	ft_save_val(t_cl *chain, t_max *save, int option)
 
 	while (chain)
 	{
-		a = chain->file;
-		if (a->st_nlink > save->slink)
-			save->slink = a->st_nlink;
-		if (ft_strlen(f->pw_name) > save->suser)
-			save->suser = ft_strlen(f->pw_name);
-		if (ft_strlen(g->gr_name) > save->sgroup)
-			save->sgroup = ft_strlen(g->gr_name);
-		if (ft_cmp_char(a->st_size) > save->ssize)
-			save->ssize = ft_cmp_char(a->st_size);
-		if (option & LS_A)
-			save->sblock += a->st_blocks;
-		else if (chain->d_name[0] != '.')
-			save->sblock += a->st_blocks;
+		if ((option & LS_A)
+			|| (!(option & LS_A) && chain->d_name[0] != '.'))
+		{
+			a = chain->file;
+			if (a->st_nlink > save->slink)
+				save->slink = a->st_nlink;
+			if (ft_strlen(f->pw_name) > save->suser)
+				save->suser = ft_strlen(f->pw_name);
+			if (ft_strlen(g->gr_name) > save->sgroup)
+				save->sgroup = ft_strlen(g->gr_name);
+			if (ft_cmp_char(a->st_size) > save->ssize)
+				save->ssize = ft_cmp_char(a->st_size);
+			if (option & LS_A)
+				save->sblock += a->st_blocks;
+			else if (chain->d_name[0] != '.')
+				save->sblock += a->st_blocks;
+		}
 		chain = chain->next;
 	}
 }
@@ -58,8 +62,25 @@ char	*ft_joinpath(char *d_name, char *path)
 		path = ft_strjoin(path, "/");
 	return (ft_strjoin(path, d_name));
 }
-/*
-char	*get_file()
-{
 
-}*/
+int		ft_printable(int option, t_cl *chain)
+{
+	if (!(option & LS_A))
+	{
+		while (chain)
+		{
+			if (chain->d_name[0] != '.')
+				return (1);
+			chain = chain->next;
+		}
+		return (0);
+	}
+	return (1);
+}
+
+/*
+   char	*get_file()
+   {
+
+   }
+*/

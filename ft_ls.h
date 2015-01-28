@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 17:10:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 19:00:03 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,5 @@ void				ft_save_val(t_cl *chain, t_max *save, int option);
 unsigned int		ft_cmp_char(unsigned long nb);
 void				ft_init(t_max *save);
 char				*ft_joinpath(char *d_name, char* path);
-
+int					ft_printable(int option, t_cl *chain);
 #endif
