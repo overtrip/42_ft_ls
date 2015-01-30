@@ -6,12 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:06:50 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/25 20:01:58 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/28 19:14:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-#include <stdio.h>
 
 void	ft_search_link(nlink_t link,  t_max *save)
 {

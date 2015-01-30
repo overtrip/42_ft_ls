@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:16 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/27 16:04:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/29 17:32:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_sort_cl(t_cl **begin, t_cl *new, int (*ft_comp)(t_cl *, t_cl *))
 	{
 		if (ft_comp(tmp->next, new) > 0)
 		{
-		//	ft_save_val(tmp, save);
 			new->next = tmp->next;
 			tmp->next = new;
 			return ;

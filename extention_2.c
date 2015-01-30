@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:04:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 18:58:23 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/30 19:39:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	ft_save_val(t_cl *chain, t_max *save, int option)
 
 char	*ft_joinpath(char *d_name, char *path)
 {
+	if (ft_strequ(d_name, path))
+		return (d_name);
 	if (!(path[ft_strlen(path) - 1] == '/'))
 		path = ft_strjoin(path, "/");
 	return (ft_strjoin(path, d_name));
@@ -77,10 +79,3 @@ int		ft_printable(int option, t_cl *chain)
 	}
 	return (1);
 }
-
-/*
-   char	*get_file()
-   {
-
-   }
-*/

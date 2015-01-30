@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 19:06:02 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/30 19:39:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_cl	*ft_create_elem(struct stat *file, char *d_name)
 	if (!(new = (t_cl *)malloc(sizeof(t_cl))))
 		return (NULL);
 	new->file = file;
+	new->path = NULL;
 	new->d_name = ft_strdup(d_name);
 	new->next = NULL;
 	return (new);
@@ -39,6 +40,11 @@ void	ft_printl(t_cl *chain, t_max *save)
 
 void	ft_check(t_cl *chain, t_max *save)
 {
+	char	*path;
+	char	buf[512];
+	int		ret;
+
+	path = (chain->path != NULL) ? chain->path : chain->d_name;
 	ft_search_right(chain->file->st_mode);
 	ft_search_link(chain->file->st_nlink, save);
 	ft_search_user(chain->file->st_uid, save);
@@ -46,23 +52,30 @@ void	ft_check(t_cl *chain, t_max *save)
 	ft_search_size(chain->file->st_size, save);
 	ft_search_date(&(chain->file->st_mtimespec), 0);
 	ft_putstr(chain->d_name);
+	if ((chain->file->st_mode & S_IFMT) == S_IFLNK)
+	{
+		ret = readlink(path, buf, 511);
+		buf[ret] = '\0';
+		ft_putstr(" -> ");
+		ft_putstr(buf);
+	}
 }
 
-void	ft_optionr(t_cl *chain, t_max *save, int option, char *path)
+void	ft_optionr(t_cl *chain, t_max *save, int option, char *d_name)
 {
 	if ((chain->file->st_mode & S_IFMT) == S_IFDIR)
 	{
-		if ((chain->d_name[1] != '.'))
+		if (!ft_strequ(chain->d_name, ".") && !ft_strequ(chain->d_name, ".."))
 		{
-			path = ft_joinpath(chain->d_name, path);
+			chain->path = ft_joinpath(chain->d_name, d_name);
 			if (((option & LS_A) && chain->d_name[0] == '.')
 					|| chain->d_name[0] != '.')
 			{
 				ft_putchar('\n');
-				ft_putstr(path);
+				ft_putstr(chain->path);
 				ft_putstr(":\n");
 			}
-			ft_aff(path, option, save);
+			ft_aff_folder(chain->path, option, save);
 		}
 	}
 }

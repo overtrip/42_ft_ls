@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 19:00:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/01/30 19:38:12 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_cl
 	struct s_cl		*next;
 	char			*d_name;
 	struct stat		*file;
+	char			*path;
 }					t_cl;
 
 t_cl				*ft_create_elem(struct stat *file, char *d_name);
@@ -56,7 +57,7 @@ int					ft_get_op(int argc, char **argv, int *start);
 void				ft_del_chain(t_cl **chain);
 void				ft_aff_list(int option, t_cl *chain, t_max *save, char *path);
 void				ft_sort_list(int option, t_cl *new, t_cl **chain);
-void				ft_aff(char *d_name, int option, t_max *save);
+void				ft_aff_folder(char *d_name, int option, t_max *save);
 void				ft_printl(t_cl *chain, t_max *save);
 void				ft_print(t_cl *chain);
 void				ft_check(t_cl *chain, t_max *save);
