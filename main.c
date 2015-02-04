@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/30 19:39:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/04 19:37:57 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 	file = ft_strrchr(path, '/') ? ft_strrchr(path, '/') + 1 : path;
 	if (ft_strequ(path, ".") || (*file != '.' || option & LS_A))
 	{
+		if (!(option & FIRST_ARG) && (option & ARGS))
+			ft_putchar('\n');
+		if (option & ARGS)
+		{
+			ft_putstr(path);
+			ft_putendl(":");
+		}
 		if (option & LS_L)
 		{
 			ft_save_val(chain, save, option);
@@ -123,7 +130,7 @@ void	ft_sort_list(int option, t_cl *new, t_cl **chain)
 		ft_sort_cl(chain, new, &ft_comp_name);
 }
 
-void	ft_aff_folder(char *d_name, int option, t_max *save)
+void	ft_aff_folder(char *d_name, int *option, t_max *save)
 {
 	DIR				*tmp;
 	struct dirent	*reading;
@@ -140,10 +147,11 @@ void	ft_aff_folder(char *d_name, int option, t_max *save)
 				return ;
 			if (lstat(ft_joinpath(reading->d_name,d_name), info) == -1)
 				return ;
-			ft_sort_list(option, ft_create_elem(info, reading->d_name), &chain);
+			ft_sort_list(*option, ft_create_elem(info, reading->d_name), &chain);
 		}
-		ft_aff_list(option, chain, save, d_name);
-		if (option & LS_REC)
+		ft_aff_list(*option, chain, save, d_name);
+		*option &= ~(FIRST_ARG);
+		if (*option & LS_REC)
 		{
 			t_cl *current = chain;
 			while (current)
@@ -156,7 +164,7 @@ void	ft_aff_folder(char *d_name, int option, t_max *save)
 	}
 }
 
-void	ft_aff_file(int argc, char **argv, int start, int option)
+void	ft_aff_file(int argc, char **argv, int start, int *option)
 {
 	t_max		save;
 	struct stat	*info;
@@ -171,10 +179,13 @@ void	ft_aff_file(int argc, char **argv, int start, int option)
 		if (lstat(argv[start], info) == -1)
 			return ;
 		if ((info->st_mode & S_IFMT) != S_IFDIR)
-			ft_sort_list(option, ft_create_elem(info, argv[start]), &chain);
+		{
+			ft_sort_list(*option, ft_create_elem(info, argv[start]), &chain);
+			*option &= ~(FIRST_ARG);
+		}
 		++start;
 	}
-	ft_aff_list_files(option, chain, &save);
+	ft_aff_list_files(*option, chain, &save);
 	//
 	// TODO: free chain elems
 	//
@@ -189,11 +200,16 @@ int		main(int argc, char **argv)
 	start = 1;
 	if ((res_opt = ft_get_op(argc, argv, &start)) == -1)
 		return (-1);
+	res_opt |= FIRST_ARG;
+	ft_sort_param(argc - 1, &argv[1]);
 	if (start == argc)
-		ft_aff_folder(".", res_opt, &save);
+		ft_aff_folder(".", &res_opt, &save);
 	else
-		ft_aff_file(argc, argv, start, res_opt);
+		ft_aff_file(argc, argv, start, &res_opt);
 	while (start < argc)
-		ft_aff_folder(argv[start++], res_opt, &save);
+	{
+		res_opt |= ARGS;
+		ft_aff_folder(argv[start++], &res_opt, &save);
+	}
 	return (0);
 }

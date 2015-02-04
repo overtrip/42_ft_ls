@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/01/29 17:07:29 by jealonso         ###   ########.fr        #
+#    Updated: 2015/02/04 18:37:00 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = \
 		extention_1.c \
 		extention_2.c \
 		main.c \
-		mask.c
+		mask.c \
+		sort_params.c
 
 OBJS = $(SRCS:.c=.o)
 
