@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/04 19:37:57 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 13:00:14 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 	char	*file;
 
 	file = ft_strrchr(path, '/') ? ft_strrchr(path, '/') + 1 : path;
-	if (ft_strequ(path, ".") || (*file != '.' || option & LS_A))
+	if (ft_strequ(path, ".")
+		|| (ft_strequ(path, "..") && (option & ARG))
+		|| (*file != '.' || option & LS_A))
 	{
-		if (!(option & FIRST_ARG) && (option & ARGS))
-			ft_putchar('\n');
 		if (option & ARGS)
 		{
+			if (!(option & FIRST_ARG))
+				ft_putchar('\n');
 			ft_putstr(path);
 			ft_putendl(":");
 		}
@@ -206,9 +208,12 @@ int		main(int argc, char **argv)
 		ft_aff_folder(".", &res_opt, &save);
 	else
 		ft_aff_file(argc, argv, start, &res_opt);
+	if (argc > 2)
+		res_opt |= ( ARGS | ARG );
+	else if (argc > 1)
+		res_opt |= ARG;
 	while (start < argc)
 	{
-		res_opt |= ARGS;
 		ft_aff_folder(argv[start++], &res_opt, &save);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/04 19:26:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 12:54:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define LS_T 16
 # define FIRST_ARG 32
 # define ARGS 64
+# define ARG 128
 
 typedef struct		s_max
 {
@@ -79,4 +80,5 @@ void				ft_init(t_max *save);
 char				*ft_joinpath(char *d_name, char* path);
 int					ft_printable(int option, t_cl *chain);
 void				ft_sort_param(int nb, char **tab);
+
 #endif

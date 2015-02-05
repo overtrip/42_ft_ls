@@ -6,11 +6,11 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/02/04 18:37:00 by jealonso         ###   ########.fr        #
+#    Updated: 2015/02/05 12:48:09 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#.SUFFIXES:
+.PHONY: all re clean fclean cleanlib cleanall fleme
 
 CC = gcc
 
@@ -49,3 +49,8 @@ cleanlib:
 cleanall: clean cleanlib
 
 re: fclean all
+
+fleme:
+	@$(MAKE) re > /dev/null
+	@$(MAKE) cleanall > /dev/null
+	@echo "YOUPI"
