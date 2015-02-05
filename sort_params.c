@@ -6,13 +6,24 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/02 15:35:02 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/04 19:38:03 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 16:51:07 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+#include <string.h>
 
-void		ft_sort_param(int nb, char **tab)
+int		ft_ascii_cmp_rev(char const *str1, char const *str2)
+{
+	return (strcmp(str1, str2) < 0);
+}
+
+int		ft_ascii_cmp(char const *str1, char const *str2)
+{
+	return (strcmp(str1, str2) > 0);
+}
+
+void	ft_sort_param(int nb, char **tab, int (*c)(char const *, char const *))
 {
 	char	*tmp;
 	int		i;
@@ -20,7 +31,7 @@ void		ft_sort_param(int nb, char **tab)
 	i = 0;
 	while (i < nb - 1)
 	{
-		if (ft_strcmp(tab[i], tab[i + 1]) > 0)
+		if (c(tab[i], tab[i + 1]))
 		{
 			tmp = tab[i];
 			tab[i] = tab[i + 1];

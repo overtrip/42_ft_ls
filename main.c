@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/05 13:00:14 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 17:08:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,14 @@ void	ft_aff_file(int argc, char **argv, int start, int *option)
 	//
 }
 
+void	ft_sort_param_hub(int argc, char ***argv, int option, int start)
+{
+	int	(*cmp)(char const *, char const *);
+
+	cmp = (option & LS_REV) ? &ft_ascii_cmp_rev : &ft_ascii_cmp;
+	ft_sort_param(argc - start, &argv[0][start], cmp);
+}
+
 int		main(int argc, char **argv)
 {
 	int		res_opt;
@@ -203,7 +211,8 @@ int		main(int argc, char **argv)
 	if ((res_opt = ft_get_op(argc, argv, &start)) == -1)
 		return (-1);
 	res_opt |= FIRST_ARG;
-	ft_sort_param(argc - 1, &argv[1]);
+	//ft_sort_param(argc - 1, &argv[1]);
+	ft_sort_param_hub(argc, &argv, res_opt, start);
 	if (start == argc)
 		ft_aff_folder(".", &res_opt, &save);
 	else

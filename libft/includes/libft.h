@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/09 17:14:13 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 17:58:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 16:26:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void				ft_putstr_fd(char const *s, int fd);
 char				*ft_strcat(char *dest, char *src);
 char				*ft_strchr(const char *s, int c);
 void				ft_strclr(char *s);
-int					ft_strcmp(char *s1, char *s2);
+int					ft_strcmp(char const *s1, char const *s2);
 char				*ft_strcpy(char *dest, char *src);
 void				ft_strdel(char **as);
 char				*ft_strdup(const char *s1);
