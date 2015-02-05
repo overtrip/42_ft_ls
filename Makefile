@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/02/05 16:48:11 by jealonso         ###   ########.fr        #
+#    Updated: 2015/02/05 18:51:40 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -g3 -I libft/includes
+CFLAGS = -Wall -Wextra -Werror -I libft/includes
 
 NAME = ft_ls
 
@@ -25,7 +25,8 @@ SRCS = \
 		extention_2.c \
 		main.c \
 		mask.c \
-		sort_params.c
+		sort_params.c \
+		error.c
 
 OBJS = $(SRCS:.c=.o)
 

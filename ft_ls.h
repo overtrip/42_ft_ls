@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/05 16:31:16 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 19:00:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <uuid/uuid.h>
 # include <grp.h>
 # include <time.h>
+# include <stdio.h>
 # include "ft_ls.h"
 # include <unistd.h>
 
@@ -82,5 +83,6 @@ int					ft_printable(int option, t_cl *chain);
 void				ft_sort_param(int nb, char **tab, int (*c)(char const *, char const *));
 int					ft_ascii_cmp_rev(char const *str1, char const *str2);
 int					ft_ascii_cmp(char const *str1, char const *str2);
+void				ft_error(char *name);
 
 #endif

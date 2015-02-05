@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/05 17:08:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/02/05 19:00:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,10 @@ void	ft_aff_folder(char *d_name, int *option, t_max *save)
 			if (!(info = (struct stat *)malloc(sizeof(struct stat))))
 				return ;
 			if (lstat(ft_joinpath(reading->d_name,d_name), info) == -1)
+			{
+				ft_error(reading->d_name);
 				return ;
+			}
 			ft_sort_list(*option, ft_create_elem(info, reading->d_name), &chain);
 		}
 		ft_aff_list(*option, chain, save, d_name);
@@ -179,7 +182,10 @@ void	ft_aff_file(int argc, char **argv, int start, int *option)
 		if (!(info = (struct stat*)malloc(sizeof(struct stat))))
 			return ;
 		if (lstat(argv[start], info) == -1)
+		{
+			ft_error(argv[start]);
 			return ;
+		}
 		if ((info->st_mode & S_IFMT) != S_IFDIR)
 		{
 			ft_sort_list(*option, ft_create_elem(info, argv[start]), &chain);
