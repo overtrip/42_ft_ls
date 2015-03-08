@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/21 18:30:46 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/08 18:40:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <pwd.h>
-# include "libft/includes/libft.h"
+# include "libft.h"
 # include <uuid/uuid.h>
 # include <grp.h>
 # include <time.h>
@@ -50,6 +50,13 @@ typedef struct		s_cl
 	char			*path;
 }					t_cl;
 
+typedef struct		s_val
+{
+	int				i;
+	int				j;
+	int				k;
+}					t_val;
+
 t_cl				*ft_create_elem(struct stat *file, char *d_name);
 void				ft_sort_cl(t_cl **begin, t_cl *new,
 								int (*ft_comp)(t_cl *, t_cl *));
@@ -57,7 +64,7 @@ int					ft_comp_name(t_cl *file1, t_cl *file2);
 int					ft_rcomp_name(t_cl *file1, t_cl *file2);
 int					ft_comp_time(t_cl *file1, t_cl *file2);
 int					ft_rcomp_time(t_cl *file1, t_cl *file2);
-int					ft_get_op(int argc, char **argv, int *start);
+int					ft_get_op(char **argv, int *start);
 void				ft_del_chain(t_cl **chain);
 void				ft_aff_list(int option, t_cl *chain,
 								t_max *save, char *path);
@@ -88,5 +95,6 @@ int					ft_ascii_cmp_rev(char const *str1, char const *str2);
 int					ft_ascii_cmp(char const *str1, char const *str2);
 void				ft_error(char *name);
 int					ft_putexit(char *str, char *tabc);
+void				ft_free_chain(t_cl *chain);
 
 #endif

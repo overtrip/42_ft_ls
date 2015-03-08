@@ -6,15 +6,29 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/02/05 18:51:40 by jealonso         ###   ########.fr        #
+#    Updated: 2015/03/08 14:53:38 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+.SUFFIXES:
+
 .PHONY: all re clean fclean cleanlib cleanall fleme
+
+INCPATH = includes
+
+LFTPATH = libft
+
+LIBFT = $(LFTPATH)/libft.a
+
+LDFLAGS = -L $(LFTPATH) -lft
+
+SRCSPATH = srcs
+
+OBJSPATH = objs
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -I libft/includes
+CFLAGS = -Wall -Wextra -Werror -I $(INCPATH) -I $(LFTPATH)/$(INCPATH)
 
 NAME = ft_ls
 
@@ -28,30 +42,44 @@ SRCS = \
 		sort_params.c \
 		error.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
 
-HEAD = ft_ls.h
+HFILES = ft_ls.h
 
-all: $(NAME)
+HEAD = $(patsubst %.h, $(INCPATH)/%.h, $(HFILES))
 
-$(NAME): $(OBJS) $(HEAD)
-	$(MAKE) -C libft
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L libft -lft
+all: $(OBJSPATH) $(LIBFT) $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $^
+
+$(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HAED)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJSPATH)
 
 fclean: clean
-	rm -f $(NAME)
+	$(MAKE) -C $(LFTPATH) fclean
+	rm -rf $(NAME)
 
 cleanlib:
-	$(MAKE) clean -C libft
+	$(MAKE) clean -C $(LFTPATH)
 
 cleanall: clean cleanlib
 
 re: fclean all
 
+$(OBJSPATH):
+	mkdir $@
+
+$(LIBFT):
+	$(MAKE) -C $(LFTPATH)
+
 fleme:
 	@$(MAKE) re > /dev/null
 	@$(MAKE) cleanall > /dev/null
 	@echo "YOUPI"
+
+test:
+	@echo "$(OBJS)"

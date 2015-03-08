@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:04:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/30 19:39:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/08 16:50:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 unsigned int		ft_cmp_char(unsigned long nb)
 {
-	unsigned int i = 1;
+	unsigned int	i;
 
+	i = 1;
 	while (nb / 10)
 	{
 		i++;
@@ -24,7 +25,20 @@ unsigned int		ft_cmp_char(unsigned long nb)
 	return (i);
 }
 
-void	ft_save_val(t_cl *chain, t_max *save, int option)
+void				ft_save_val2(struct stat a, t_max *save,
+									struct passwd f, struct group g)
+{
+	if (a.st_nlink > save->slink)
+		save->slink = a.st_nlink;
+	if (ft_strlen(f.pw_name) > save->suser)
+		save->suser = ft_strlen(f.pw_name);
+	if (ft_strlen(g.gr_name) > save->sgroup)
+		save->sgroup = ft_strlen(g.gr_name);
+	if (ft_cmp_char(a.st_size) > save->ssize)
+		save->ssize = ft_cmp_char(a.st_size);
+}
+
+void				ft_save_val(t_cl *chain, t_max *save, int option)
 {
 	struct passwd	*f;
 	struct group	*g;
@@ -32,21 +46,12 @@ void	ft_save_val(t_cl *chain, t_max *save, int option)
 
 	f = getpwuid(chain->file->st_uid);
 	g = getgrgid(chain->file->st_gid);
-
 	while (chain)
 	{
-		if ((option & LS_A)
-			|| (!(option & LS_A) && chain->d_name[0] != '.'))
+		if ((option & LS_A) || (!(option & LS_A) && chain->d_name[0] != '.'))
 		{
 			a = chain->file;
-			if (a->st_nlink > save->slink)
-				save->slink = a->st_nlink;
-			if (ft_strlen(f->pw_name) > save->suser)
-				save->suser = ft_strlen(f->pw_name);
-			if (ft_strlen(g->gr_name) > save->sgroup)
-				save->sgroup = ft_strlen(g->gr_name);
-			if (ft_cmp_char(a->st_size) > save->ssize)
-				save->ssize = ft_cmp_char(a->st_size);
+			ft_save_val2(*a, save, *f, *g);
 			if (option & LS_A)
 				save->sblock += a->st_blocks;
 			else if (chain->d_name[0] != '.')
@@ -56,7 +61,7 @@ void	ft_save_val(t_cl *chain, t_max *save, int option)
 	}
 }
 
-char	*ft_joinpath(char *d_name, char *path)
+char				*ft_joinpath(char *d_name, char *path)
 {
 	if (ft_strequ(d_name, path))
 		return (d_name);
@@ -65,7 +70,7 @@ char	*ft_joinpath(char *d_name, char *path)
 	return (ft_strjoin(path, d_name));
 }
 
-int		ft_printable(int option, t_cl *chain)
+int					ft_printable(int option, t_cl *chain)
 {
 	if (!(option & LS_A))
 	{

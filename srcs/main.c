@@ -6,54 +6,61 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/11 11:44:02 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/08 18:40:30 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int		ft_get_op(int argc, char **argv, int *start)
+t_val			*ft_init_index(int i, int j, int k)
+{
+	t_val	*index;
+
+	index->i = i;
+	index->j = j;
+	index->k = k;
+	return (index);
+}
+
+int				ft_get_op(char **argv, int *start)
 {
 	const int		tab[5] = {LS_A, LS_REC, LS_REV, LS_L, LS_T};
 	const char		tabc[6] = {'a', 'R', 'r', 'l', 't', '\0'};
-	int				i;
-	int				j;
-	int				k;
+	t_val			*index;
 	int				ret;
 
-	argc = argc;
+	index = ft_init_index(1, 1, 1);
 	ret = 0;
-	i = 1;
-	while (argv[i] && argv[i][0] == '-')
+	while (argv[index->i] && argv[index->i][0] == '-')
 	{
-		if (!argv[i++][1])
+		if (!argv[index->i++][1])
 			continue ;
-		i--;
-		if (argv[i][1] == '-' && argv[i][2])
+		index->i--;
+		if (argv[index->i][1] == '-' && argv[index->i][2])
 			return (-1);
-		if (argv[i][1] == '-' && !argv[i][2])
+		if (argv[index->i][1] == '-' && !argv[index->i][2])
 		{
-			i++;
+			index->i++;
 			break ;
 		}
-		j = 0;
-		while (argv[i][++j])
+		index->j = 0;
+		while (argv[index->i][++index->j])
 		{
-			k = -1;
-			while (tabc[++k])
+			index->k = -1;
+			while (tabc[++index->k])
 			{
-				if (tabc[k] == argv[i][j])
+				if (tabc[index->k] == argv[index->i][index->j])
 				{
-					ret |= tab[k];
+					ret |= tab[index->k];
 					break ;
 				}
 			}
-			if (k == 5)
+			if (index->k == 5)
 				return (-1);
 		}
-		i++;
+		index->i++;
 	}
-	*start = i;
+	*start = index->i;
 	return (ret);
 }
 
@@ -64,14 +71,29 @@ static void		ft_print_total(t_max *save)
 	ft_putchar('\n');
 }
 
-void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
+void			ft_aff_list2(t_cl *chain, int option, t_max *save)
+{
+	while (chain)
+	{
+		if (option & LS_A || chain->d_name[0] != '.')
+		{
+			if (option & LS_L)
+				ft_printl(chain, save);
+			else
+				ft_print(chain);
+		}
+		chain = chain->next;
+	}
+}
+
+void			ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 {
 	char	*file;
 
 	file = ft_strrchr(path, '/') ? ft_strrchr(path, '/') + 1 : path;
 	if (ft_strequ(path, ".")
-		|| (ft_strequ(path, "..") && (option & ARG))
-		|| (*file != '.' || option & LS_A))
+			|| (ft_strequ(path, "..") && (option & ARG))
+			|| (*file != '.' || option & LS_A))
 	{
 		if (option & ARGS)
 		{
@@ -79,6 +101,9 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 				ft_putchar('\n');
 			ft_putstr(path);
 			ft_putendl(":");
+			//
+			//TODO enlever laffichage du nom quand on lance un seul repertoire
+			//
 		}
 		if (option & LS_L)
 		{
@@ -86,21 +111,11 @@ void	ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 			if (ft_printable(option, chain))
 				ft_print_total(save);
 		}
-		while (chain)
-		{
-			if (option & LS_A || chain->d_name[0] != '.')
-			{
-				if (option & LS_L)
-					ft_printl(chain, save);
-				else
-					ft_print(chain);
-			}
-			chain = chain->next;
-		}
+		ft_aff_list2(chain, option, save);
 	}
 }
 
-void	ft_aff_list_files(int option, t_cl *chain, t_max *save)
+void			ft_aff_list_files(int option, t_cl *chain, t_max *save)
 {
 	if (chain && option & LS_L)
 		ft_save_val(chain, save, option);
@@ -117,7 +132,7 @@ void	ft_aff_list_files(int option, t_cl *chain, t_max *save)
 	}
 }
 
-void	ft_sort_list(int option, t_cl *new, t_cl **chain)
+void			ft_sort_list(int option, t_cl *new, t_cl **chain)
 {
 	if (option & LS_T)
 	{
@@ -132,7 +147,30 @@ void	ft_sort_list(int option, t_cl *new, t_cl **chain)
 		ft_sort_cl(chain, new, &ft_comp_name);
 }
 
-void	ft_aff_folder(char *d_name, int *option, t_max *save)
+void			ft_opt_ls_rec(t_cl *chain, t_max *save,
+		int *option, char *d_name)
+{
+	t_cl	*current;
+
+	if (*(option) & LS_REC)
+	{
+		current = chain;
+		while (current)
+		{
+			ft_optionr(current, save, option, d_name);
+			current = current->next;
+		}
+	}
+}
+
+void			ft_aff_folder2(t_cl *chain, char *name, int *option, t_max save)
+{
+	ft_aff_list(*option, chain, &save, name);
+	*option &= ~(FIRST_ARG);
+	ft_opt_ls_rec(chain, &save, option, name);
+}
+
+void			ft_aff_folder(char *d_name, int *option, t_max *save)
 {
 	DIR				*tmp;
 	struct dirent	*reading;
@@ -147,29 +185,36 @@ void	ft_aff_folder(char *d_name, int *option, t_max *save)
 		{
 			if (!(info = (struct stat *)malloc(sizeof(struct stat))))
 				return ;
-			if (lstat(ft_joinpath(reading->d_name,d_name), info) == -1)
+			if (lstat(ft_joinpath(reading->d_name, d_name), info) == -1)
 			{
 				ft_error(reading->d_name);
 				return ;
 			}
-			ft_sort_list(*option, ft_create_elem(info, reading->d_name), &chain);
+			ft_sort_list(*option,
+					ft_create_elem(info, reading->d_name), &chain);
 		}
-		ft_aff_list(*option, chain, save, d_name);
-		*option &= ~(FIRST_ARG);
-		if (*option & LS_REC)
-		{
-			t_cl *current = chain;
-			while (current)
-			{
-				ft_optionr(current, save, option, d_name);
-				current = current->next;
-			}
-		}
+		ft_aff_folder2(chain, d_name, option, *save);
 		closedir(tmp);
 	}
 }
 
-void	ft_aff_file(int argc, char **argv, int start, int *option)
+void			ft_free_chain(t_cl *chain)
+{
+	t_cl	*save;
+
+	save = chain;
+	while (save)
+	{
+		save = chain->next;
+		free(chain->d_name);
+		free(chain->file);
+		free(chain->path);
+		free(chain);
+		chain = save;
+	}
+}
+
+void			ft_aff_file(int argc, char **argv, int start, int *option)
 {
 	t_max		save;
 	struct stat	*info;
@@ -194,12 +239,10 @@ void	ft_aff_file(int argc, char **argv, int start, int *option)
 		++start;
 	}
 	ft_aff_list_files(*option, chain, &save);
-	//
-	// TODO: free chain elems
-	//
+	ft_free_chain(chain);
 }
 
-void	ft_sort_param_hub(int argc, char ***argv, int option, int start)
+void			ft_sort_param_hub(int argc, char ***argv, int option, int start)
 {
 	int	(*cmp)(char const *, char const *);
 
@@ -207,24 +250,23 @@ void	ft_sort_param_hub(int argc, char ***argv, int option, int start)
 	ft_sort_param(argc - start, &argv[0][start], cmp);
 }
 
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
 	int		res_opt;
 	int		start;
 	t_max	save;
 
 	start = 1;
-	if ((res_opt = ft_get_op(argc, argv, &start)) == -1)
+	if ((res_opt = ft_get_op(argv, &start)) == -1)
 		return (-1);
 	res_opt |= FIRST_ARG;
-	//ft_sort_param(argc - 1, &argv[1]);
 	ft_sort_param_hub(argc, &argv, res_opt, start);
 	if (start == argc)
 		ft_aff_folder(".", &res_opt, &save);
 	else
 		ft_aff_file(argc, argv, start, &res_opt);
 	if (argc > 2)
-		res_opt |= ( ARGS | ARG );
+		res_opt |= (ARGS | ARG);
 	else if (argc > 1)
 		res_opt |= ARG;
 	while (start < argc)

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 18:50:23 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/05 16:26:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/08 14:54:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_strcmp(char const *s1, char const *s2)
 {
-	int	i;
-	unsigned char *s1ptr;
-	unsigned char *s2ptr;
+	int				i;
+	unsigned char	*s1ptr;
+	unsigned char	*s2ptr;
 
 	s1ptr = (unsigned char *)s1;
 	s2ptr = (unsigned char *)s2;

@@ -6,13 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:06:50 by jealonso          #+#    #+#             */
-/*   Updated: 2015/01/28 19:14:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/08 15:00:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_search_link(nlink_t link,  t_max *save)
+void	ft_search_link(nlink_t link, t_max *save)
 {
 	if (ft_strlen(ft_itoa(link)) < ft_strlen(ft_itoa(save->slink)))
 		ft_putspace(ft_strlen(ft_itoa(save->slink)) -
@@ -21,7 +21,7 @@ void	ft_search_link(nlink_t link,  t_max *save)
 	ft_putchar(' ');
 }
 
-void	ft_search_user(uid_t uid,  t_max *save)
+void	ft_search_user(uid_t uid, t_max *save)
 {
 	struct passwd	*f;
 
@@ -32,7 +32,7 @@ void	ft_search_user(uid_t uid,  t_max *save)
 	ft_putstr("  ");
 }
 
-void	ft_search_groups(gid_t gid,  t_max *save)
+void	ft_search_groups(gid_t gid, t_max *save)
 {
 	struct group	*f;
 
@@ -43,7 +43,7 @@ void	ft_search_groups(gid_t gid,  t_max *save)
 	ft_putstr("  ");
 }
 
-void	ft_search_size(off_t size,  t_max *save)
+void	ft_search_size(off_t size, t_max *save)
 {
 	if (ft_cmp_char(size) < save->ssize)
 		ft_putspace((save->ssize) - ft_cmp_char(size));
