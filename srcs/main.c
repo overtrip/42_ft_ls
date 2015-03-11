@@ -6,19 +6,17 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/08 18:40:30 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/11 19:11:43 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-t_val			*ft_init_index(int i, int j, int k)
+void			*ft_init_index(t_val *index)
 {
-	t_val	*index;
-
-	index->i = i;
-	index->j = j;
-	index->k = k;
+	index->i = 1;
+	index->j = 1;
+	index->k = 1;
 	return (index);
 }
 
@@ -26,41 +24,41 @@ int				ft_get_op(char **argv, int *start)
 {
 	const int		tab[5] = {LS_A, LS_REC, LS_REV, LS_L, LS_T};
 	const char		tabc[6] = {'a', 'R', 'r', 'l', 't', '\0'};
-	t_val			*index;
+	t_val			index;
 	int				ret;
 
-	index = ft_init_index(1, 1, 1);
+	ft_init_index(&index);
 	ret = 0;
-	while (argv[index->i] && argv[index->i][0] == '-')
+	while (argv[index.i] && argv[index.i][0] == '-')
 	{
-		if (!argv[index->i++][1])
+		if (!argv[index.i++][1])
 			continue ;
-		index->i--;
-		if (argv[index->i][1] == '-' && argv[index->i][2])
+		index.i--;
+		if (argv[index.i][1] == '-' && argv[index.i][2])
 			return (-1);
-		if (argv[index->i][1] == '-' && !argv[index->i][2])
+		if (argv[index.i][1] == '-' && !argv[index.i][2])
 		{
-			index->i++;
+			index.i++;
 			break ;
 		}
-		index->j = 0;
-		while (argv[index->i][++index->j])
+		index.j = 0;
+		while (argv[index.i][++index.j])
 		{
-			index->k = -1;
-			while (tabc[++index->k])
+			index.k = -1;
+			while (tabc[++index.k])
 			{
-				if (tabc[index->k] == argv[index->i][index->j])
+				if (tabc[index.k] == argv[index.i][index.j])
 				{
-					ret |= tab[index->k];
+					ret |= tab[index.k];
 					break ;
 				}
 			}
-			if (index->k == 5)
+			if (index.k == 5)
 				return (-1);
 		}
-		index->i++;
+		index.i++;
 	}
-	*start = index->i;
+	*start = index.i;
 	return (ret);
 }
 
@@ -101,9 +99,6 @@ void			ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 				ft_putchar('\n');
 			ft_putstr(path);
 			ft_putendl(":");
-			//
-			//TODO enlever laffichage du nom quand on lance un seul repertoire
-			//
 		}
 		if (option & LS_L)
 		{
@@ -265,9 +260,9 @@ int				main(int argc, char **argv)
 		ft_aff_folder(".", &res_opt, &save);
 	else
 		ft_aff_file(argc, argv, start, &res_opt);
-	if (argc > 2)
+	if ((argc - start) > 1)
 		res_opt |= (ARGS | ARG);
-	else if (argc > 1)
+	else
 		res_opt |= ARG;
 	while (start < argc)
 	{
