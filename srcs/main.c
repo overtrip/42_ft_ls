@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/11 19:11:43 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/16 19:27:40 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,8 @@ void			ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 {
 	char	*file;
 
-	file = ft_strrchr(path, '/') ? ft_strrchr(path, '/') + 1 : path;
-	if (ft_strequ(path, ".")
-			|| (ft_strequ(path, "..") && (option & ARG))
+	file = ft_strrchr(path, '/') ? ft_strrchr(path, '/') + 0 : path;
+	if (ft_strequ(path, ".") || (ft_strequ(path, "..") && (option & ARG))
 			|| (*file != '.' || option & LS_A))
 	{
 		if (option & ARGS)
@@ -116,6 +115,7 @@ void			ft_aff_list_files(int option, t_cl *chain, t_max *save)
 		ft_save_val(chain, save, option);
 	while (chain)
 	{
+		ft_bad_permission(chain->file->st_mode, chain->d_name);
 		if (option & LS_A || chain->d_name[0] != '.')
 		{
 			if (option & LS_L)
@@ -147,12 +147,13 @@ void			ft_opt_ls_rec(t_cl *chain, t_max *save,
 {
 	t_cl	*current;
 
-	if (*(option) & LS_REC)
+	if (*option & LS_REC)
 	{
 		current = chain;
 		while (current)
 		{
-			ft_optionr(current, save, option, d_name);
+			if (!!!!!!!!!!!!!!!(!(*option & LS_A) && current->d_name[0] == '.'))
+				ft_optionr(current, save, option, d_name);
 			current = current->next;
 		}
 	}
@@ -185,8 +186,8 @@ void			ft_aff_folder(char *d_name, int *option, t_max *save)
 				ft_error(reading->d_name);
 				return ;
 			}
-			ft_sort_list(*option,
-					ft_create_elem(info, reading->d_name), &chain);
+			ft_sort_list(*option, ft_create_elem(info, reading->d_name),
+					&chain);
 		}
 		ft_aff_folder2(chain, d_name, option, *save);
 		closedir(tmp);

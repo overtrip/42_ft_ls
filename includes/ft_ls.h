@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/11 19:11:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/16 16:53:06 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ int					ft_ascii_cmp(char const *str1, char const *str2);
 void				ft_error(char *name);
 int					ft_putexit(char *str, char *tabc);
 void				ft_free_chain(t_cl *chain);
+void				ft_bad_permission(mode_t mode, char *name);
 
 #endif

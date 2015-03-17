@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/02/04 19:37:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/16 16:36:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void	ft_optionr(t_cl *chain, t_max *save, int *option, char *d_name)
 		if (!ft_strequ(chain->d_name, ".") && !ft_strequ(chain->d_name, ".."))
 		{
 			chain->path = ft_joinpath(chain->d_name, d_name);
+			ft_putchar('\n');
+			ft_putstr(chain->path);
+			ft_putstr(":\n");
 			ft_aff_folder(chain->path, option, save);
 		}
 	}

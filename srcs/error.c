@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 15:36:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/08 15:33:02 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/16 19:27:46 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,19 @@ void	ft_error(char *name)
 	str = ft_strjoin("ft_ls: ", name);
 	perror(str);
 	free(str);
+}
+
+void	ft_bad_permission(mode_t mode, char *name)
+{
+	char *message;
+
+	if ((mode & (S_IRUSR | S_IXUSR)) == (S_IRUSR | S_IXUSR))
+	{
+		ft_putchar('\n');
+		ft_putstr(name);
+		ft_putchar(':');
+		ft_putstr("\nft_ls: ");
+		message = ft_strjoin(name, ": Permission denied\n\n");
+		ft_putstr(message);
+	}
 }

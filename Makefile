@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/03/11 12:36:09 by jealonso         ###   ########.fr        #
+#    Updated: 2015/03/16 15:34:12 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ $(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HAED)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
+	$(MAKE) -C $(LFTPATH) clean
 	rm -rf $(OBJSPATH)
 
 fclean: clean

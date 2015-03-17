@@ -6,11 +6,13 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2015/01/28 17:57:35 by jealonso         ###   ########.fr        #
+#    Updated: 2015/03/13 18:51:14 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+INCPATH = includes
 
 SRCS = \
 ft_atoi.c \
@@ -70,7 +72,7 @@ ft_toupper.c
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -Iincludes
+CFLAGS = -Wall -Werror -Wextra -I $(INCPATH)
 
 OBJS = $(SRCS:.c=.o)
 
