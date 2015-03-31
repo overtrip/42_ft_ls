@@ -6,11 +6,10 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/16 16:36:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/27 17:04:04 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "ft_ls.h"
 
 t_cl	*ft_create_elem(struct stat *file, char *d_name)
@@ -32,29 +31,32 @@ void	ft_print(t_cl *chain)
 		ft_putendl(chain->d_name);
 }
 
-void	ft_printl(t_cl *chain, t_max *save)
+void	ft_printl(t_cl *chain, t_max *save, int option)
 {
-	ft_check(chain, save);
+	ft_check(chain, save, option);
 	ft_putchar('\n');
 }
 
-void	ft_check(t_cl *chain, t_max *save)
+void	ft_check(t_cl *chain, t_max *save, int option)
 {
 	char	*path;
 	char	buf[512];
 	int		ret;
 
 	path = (chain->path != NULL) ? chain->path : chain->d_name;
-	ft_search_right(chain->file->st_mode);
+	ft_search_right(chain->file->st_mode, path);
 	ft_search_link(chain->file->st_nlink, save);
 	ft_search_user(chain->file->st_uid, save);
 	ft_search_groups(chain->file->st_gid, save);
 	ft_search_size(chain->file->st_size, save);
 	ft_search_date(&(chain->file->st_mtimespec), 0);
-	ft_putstr(chain->d_name);
+	if (option & LS_G)
+		ft_color(chain);
+	else
+		ft_putstr(chain->d_name);
 	if ((chain->file->st_mode & S_IFMT) == S_IFLNK)
 	{
-		ret = readlink(path, buf, 511);
+		ret = readlink(ft_strjoin("/", path), buf, 511);
 		buf[ret] = '\0';
 		ft_putstr(" -> ");
 		ft_putstr(buf);

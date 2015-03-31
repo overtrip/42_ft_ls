@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:06:50 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/08 15:00:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/26 15:08:12 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ void	ft_search_user(uid_t uid, t_max *save)
 
 	f = getpwuid(uid);
 	if (ft_strlen(f->pw_name) < save->suser)
+	{
+		ft_putstr(f->pw_name);
 		ft_putspace(ft_strlen(ft_itoa(save->suser)) - ft_strlen(f->pw_name));
-	ft_putstr(f->pw_name);
+	}
+	else
+		ft_putstr(f->pw_name);
 	ft_putstr("  ");
 }
 

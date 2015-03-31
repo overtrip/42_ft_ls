@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/16 19:27:40 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/03/27 15:13:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void			*ft_init_index(t_val *index)
 
 int				ft_get_op(char **argv, int *start)
 {
-	const int		tab[5] = {LS_A, LS_REC, LS_REV, LS_L, LS_T};
-	const char		tabc[6] = {'a', 'R', 'r', 'l', 't', '\0'};
+	const int		tab[6] = {LS_A, LS_REC, LS_REV, LS_L, LS_T, LS_G};
+	const char		tabc[7] = {'a', 'R', 'r', 'l', 't', 'G', '\0'};
 	t_val			index;
 	int				ret;
 
@@ -53,7 +53,7 @@ int				ft_get_op(char **argv, int *start)
 					break ;
 				}
 			}
-			if (index.k == 5)
+			if (index.k == 6)
 				return (-1);
 		}
 		index.i++;
@@ -76,7 +76,7 @@ void			ft_aff_list2(t_cl *chain, int option, t_max *save)
 		if (option & LS_A || chain->d_name[0] != '.')
 		{
 			if (option & LS_L)
-				ft_printl(chain, save);
+				ft_printl(chain, save, option);
 			else
 				ft_print(chain);
 		}
@@ -101,6 +101,7 @@ void			ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 		}
 		if (option & LS_L)
 		{
+			chain->maxmin = 0;
 			ft_save_val(chain, save, option);
 			if (ft_printable(option, chain))
 				ft_print_total(save);
@@ -115,11 +116,11 @@ void			ft_aff_list_files(int option, t_cl *chain, t_max *save)
 		ft_save_val(chain, save, option);
 	while (chain)
 	{
-		ft_bad_permission(chain->file->st_mode, chain->d_name);
+		//ft_bad_permission(chain->file->st_mode, chain->d_name);
 		if (option & LS_A || chain->d_name[0] != '.')
 		{
 			if (option & LS_L)
-				ft_printl(chain, save);
+				ft_printl(chain, save, option);
 			else
 				ft_print(chain);
 		}
