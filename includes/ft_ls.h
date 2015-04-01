@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/31 18:38:46 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/01 19:23:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@
 #define BOLD_PURPLE		"\e[22;45m"
 #define BOLD_CYAN		"\e[22;46m"
 #define BOLD_LIGHT GRAY	"\e[22;47m"	//looks like bright white
-#define BOLD_RED		"\e[22;
+#define BOLD_RED		"\e[22;41m"
 
 #define YELLOW			"\033[02;33m"
 #define DARK_GREY		"\033[01;30m"
-
+#define BOLD_GRENN		"\e[22;42m"
+#define	BOLD_YELLOW		"\e[02;43m"
 #define RESET			"\033[0m"
 
 typedef struct		s_max

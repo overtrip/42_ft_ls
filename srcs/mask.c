@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:08:04 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/31 18:37:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/01 19:23:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,33 @@ int						ft_cfile(mode_t mode)
 	return (0);
 }
 
+int						ft_brep(mode_t mode)
+{
+	if (((mode & (S_ISVTX | S_IXOTH)) == (S_ISVTX | S_IXOTH) && (mode & S_IWOTH) == S_IWOTH))
+		return (1);
+	if ((mode & S_IWOTH) == S_IWOTH)
+		return (2);
+	return (0);
+}
+
+int						ft_crepertories(mode_t mode)
+{
+	if ((mode & S_IWOTH) == S_IWOTH)
+		return (1);
+	return (0);
+}
+
+void					ft_color_directories(t_cl *chain)
+{
+	(ft_crepertories(chain->file->st_mode) == 1) ?
+		ft_putstr(RESET) : ft_putstr(BLUE);
+	if (ft_brep(chain->file->st_mode) > 0)
+		(ft_brep(chain->file->st_mode) == 1) ?
+			ft_putstr(BOLD_GREEN) : ft_putstr(BOLD_YELLOW);
+	ft_putstr(chain->d_name);
+
+}
+
 void					ft_color_repertories(t_cl *chain)
 {
 	(ft_cfile(chain->file->st_mode) == 1) ?
@@ -113,8 +140,7 @@ void					ft_color(t_cl *chain)
 {
 	if ((chain->file->st_mode & S_IFMT) == S_IFDIR)
 	{
-		ft_putstr(BLUE);
-		ft_putstr(chain->d_name);
+		ft_color_directories(chain);
 	}
 	else if ((chain->file->st_mode & S_IFMT) == S_IFREG)
 		ft_color_repertories(chain);
