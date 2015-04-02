@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/01 19:23:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/02 14:49:53 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,8 @@ int					ft_putexit(char *str, char *tabc);
 void				ft_free_chain(t_cl *chain);
 void				ft_bad_permission(mode_t mode, char *name);
 void				ft_color(t_cl *chain);
+int					ft_bfile(mode_t mode);
+void				ft_color_repertories(t_cl *chain);
+void				ft_color_directories(t_cl *chain);
 
 #endif
