@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:08:04 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/02 15:47:29 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/03 14:50:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,14 @@ void					ft_search_right(mode_t modes, char *path)
 
 void					ft_putspace(int nb)
 {
-	while (nb-- >= 0)
+	int save;
+
+	save = 0;
+	while (save < nb)
+	{
 		ft_putchar(' ');
+		save++;
+	}
 }
 
 void					ft_init(t_max *save)

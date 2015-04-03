@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/02 14:49:53 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/02 15:52:59 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
-#include <sys/xattr.h>
+# include <sys/xattr.h>
 # include <pwd.h>
 # include "libft.h"
 # include <uuid/uuid.h>
@@ -35,28 +35,28 @@
 # define ARG 128
 # define LS_G 256
 
-#define BLACK			"\033[22;30m"
-#define RED				"\033[22;31m"
-#define GREEN			"\033[22;32m"
-#define BROWN			"\033[22;33m"
-#define BLUE			"\033[22;34m"
-#define PURPLE			"\033[22;35m"
-#define CYAN			"\033[22;36m"
-#define LIGHT_GRAY		"\033[22;37m"
-#define BOLD_BLACK 		"\e[22;40m"	//usually shows up as dark grey
-#define BOLD_GREEN		"\e[22;42m"
-#define BOLD_BROWN		"\e[22;43m"	//usually shows up as yellow
-#define BOLD_BLUE		"\e[22;44m"
-#define BOLD_PURPLE		"\e[22;45m"
-#define BOLD_CYAN		"\e[22;46m"
-#define BOLD_LIGHT GRAY	"\e[22;47m"	//looks like bright white
-#define BOLD_RED		"\e[22;41m"
+# define BLACK			"\033[22;30m"
+# define RED				"\033[22;31m"
+# define GREEN			"\033[22;32m"
+# define BROWN			"\033[22;33m"
+# define BLUE			"\033[22;34m"
+# define PURPLE			"\033[22;35m"
+# define CYAN			"\033[22;36m"
+# define LIGHT_GRAY		"\033[22;37m"
+# define BOLD_BLACK 		"\e[22;40m"	//usually shows up as dark grey
+# define BOLD_GREEN		"\e[22;42m"
+# define BOLD_BROWN		"\e[22;43m"	//usually shows up as yellow
+# define BOLD_BLUE		"\e[22;44m"
+# define BOLD_PURPLE		"\e[22;45m"
+# define BOLD_CYAN		"\e[22;46m"
+# define BOLD_LIGHT GRAY	"\e[22;47m"	//looks like bright white
+# define BOLD_RED		"\e[22;41m"
 
-#define YELLOW			"\033[02;33m"
-#define DARK_GREY		"\033[01;30m"
-#define BOLD_GRENN		"\e[22;42m"
-#define	BOLD_YELLOW		"\e[02;43m"
-#define RESET			"\033[0m"
+# define YELLOW			"\033[02;33m"
+# define DARK_GREY		"\033[01;30m"
+# define BOLD_GRENN		"\e[22;42m"
+# define	BOLD_YELLOW		"\e[02;43m"
+# define RESET			"\033[0m"
 
 typedef struct		s_max
 {
