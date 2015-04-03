@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 15:36:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/03/25 15:33:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/03 17:05:15 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	ft_error(char *name)
 	perror(str);
 	free(str);
 }
-
 /*void	ft_bad_permission(mode_t mode, char *name)
 {
 	char *message;

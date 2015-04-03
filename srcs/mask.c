@@ -6,13 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:08:04 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/03 14:50:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/03 17:19:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static const t_flags    g_sf[] =
+static const t_flags	g_sf[] =
 {
 	{S_IFMT, S_IFBLK, 'b'}, {S_IFMT, S_IFCHR, 'c'}, {S_IFMT, S_IFLNK, 'l'},
 	{S_IFMT, S_IFDIR, 'd'}, {S_IFMT, S_IFSOCK, 's'}, {S_IFMT, S_IFIFO, 'p'},
@@ -39,10 +39,10 @@ static const t_flags    g_sf[] =
 	ft_putendl_fd(error, 2);
 }*/
 
-void					ft_search_right(mode_t modes, char *path)
+void					ft_search_right(mode_t modes/*, char *path*/)
 {
 	int	i;
-	size_t	ext;
+	//size_t	ext;
 
 	i = 0;
 	while (g_sf[i].c != 0)
@@ -51,11 +51,11 @@ void					ft_search_right(mode_t modes, char *path)
 			ft_putchar(g_sf[i].c);
 		i++;
 	}
-	ext = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
+/*	ext = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
 	if (ext	> 0)
 		ft_putchar('@');
 	else
-		ft_putchar(' ');
+		ft_putchar(' ');*/
 	ft_putchar(' ');
 }
 
@@ -111,7 +111,7 @@ void					ft_color(t_cl *chain)
 		ft_putstr(BLUE);
 		ft_putstr(BOLD_YELLOW);
 	}
-	else if((chain->file->st_mode & S_IFMT) == S_IFBLK)
+	else if ((chain->file->st_mode & S_IFMT) == S_IFBLK)
 	{
 		ft_putstr(BLUE);
 		ft_putstr(BOLD_CYAN);

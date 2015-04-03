@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/04/02 14:53:44 by jealonso         ###   ########.fr        #
+#    Updated: 2015/04/03 17:25:40 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,9 @@ SRCS = \
 		mask.c \
 		sort_params.c \
 		error.c \
-		color.c
+		color.c \
+		aff_list.c \
+		aff_file.c
 
 OBJS = $(patsubst %.c, $(OBJSPATH)/%.o, $(SRCS))
 

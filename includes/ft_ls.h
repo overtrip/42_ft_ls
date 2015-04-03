@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/02 15:52:59 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/03 17:24:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,28 @@
 # define ARG 128
 # define LS_G 256
 
-# define BLACK			"\033[22;30m"
+# define BLACK				"\033[22;30m"
 # define RED				"\033[22;31m"
-# define GREEN			"\033[22;32m"
-# define BROWN			"\033[22;33m"
-# define BLUE			"\033[22;34m"
-# define PURPLE			"\033[22;35m"
-# define CYAN			"\033[22;36m"
-# define LIGHT_GRAY		"\033[22;37m"
-# define BOLD_BLACK 		"\e[22;40m"	//usually shows up as dark grey
-# define BOLD_GREEN		"\e[22;42m"
-# define BOLD_BROWN		"\e[22;43m"	//usually shows up as yellow
-# define BOLD_BLUE		"\e[22;44m"
+# define GREEN				"\033[22;32m"
+# define BROWN				"\033[22;33m"
+# define BLUE				"\033[22;34m"
+# define PURPLE				"\033[22;35m"
+# define CYAN				"\033[22;36m"
+# define LIGHT_GRAY			"\033[22;37m"
+# define BOLD_BLACK 		"\e[22;40m"
+# define BOLD_GREEN			"\e[22;42m"
+# define BOLD_BROWN			"\e[22;43m"
+# define BOLD_BLUE			"\e[22;44m"
 # define BOLD_PURPLE		"\e[22;45m"
-# define BOLD_CYAN		"\e[22;46m"
-# define BOLD_LIGHT GRAY	"\e[22;47m"	//looks like bright white
-# define BOLD_RED		"\e[22;41m"
+# define BOLD_CYAN			"\e[22;46m"
+# define BOLD_LIGHT GRAY	"\e[22;47m"
+# define BOLD_RED			"\e[22;41m"
 
-# define YELLOW			"\033[02;33m"
-# define DARK_GREY		"\033[01;30m"
-# define BOLD_GRENN		"\e[22;42m"
-# define	BOLD_YELLOW		"\e[02;43m"
-# define RESET			"\033[0m"
+# define YELLOW				"\033[02;33m"
+# define DARK_GREY			"\033[01;30m"
+# define BOLD_GRENN			"\e[22;42m"
+# define BOLD_YELLOW		"\e[02;43m"
+# define RESET				"\033[0m"
 
 typedef struct		s_max
 {
@@ -85,9 +85,9 @@ typedef struct		s_val
 
 typedef struct		s_flags
 {
-	int		 mask;
-	int		ret;
-	char	c;
+	int				mask;
+	int				ret;
+	char			c;
 }					t_flags;
 
 t_cl				*ft_create_elem(struct stat *file, char *d_name);
@@ -107,13 +107,14 @@ void				ft_aff_file(int argc, char **argv, int start, int *option);
 void				ft_printl(t_cl *chain, t_max *save, int option);
 void				ft_print(t_cl *chain);
 void				ft_check(t_cl *chain, t_max *save, int option);
+void				ft_aff_list_files(int option, t_cl *chain, t_max *save);
 void				ft_search_date(struct timespec *time, int i);
 void				ft_search_size(off_t size, t_max *save);
 void				ft_search_groups(gid_t gid, t_max *save);
 void				ft_search_user(uid_t uid, t_max *save);
 void				ft_search_link(nlink_t link, t_max *save);
 void				ft_putspace(int nb);
-void				ft_search_right(mode_t mode, char *path);
+void				ft_search_right(mode_t mode/*, char *path*/);
 void				ft_wright(int mask);
 void				ft_optionr(t_cl *chain, t_max *save,
 		int *option, char *path);
@@ -134,5 +135,9 @@ void				ft_color(t_cl *chain);
 int					ft_bfile(mode_t mode);
 void				ft_color_repertories(t_cl *chain);
 void				ft_color_directories(t_cl *chain);
+void				ft_opt_ls_rec(t_cl *chain, t_max *save, int *option,
+		char *d_name);
+void				ft_sort_param_hub(int argc, char ***argv, int option,
+		int start);
 
 #endif
