@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/03 17:23:18 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/07 16:10:21 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			*ft_init_index(t_val *index)
 {
 	index->i = 1;
-	index->j = 1;
+	index->j = 0;
 	index->k = 1;
 	return (index);
 }
@@ -41,7 +41,6 @@ int				ft_get_op(char **argv, int *start)
 			index.i++;
 			break ;
 		}
-		index.j = 0;
 		while (argv[index.i][++index.j])
 		{
 			index.k = -1;
@@ -52,6 +51,11 @@ int				ft_get_op(char **argv, int *start)
 					ret |= tab[index.k];
 					break ;
 				}
+			}
+			if (tabc[index.k] != argv[index.i][index.j])
+			{
+				ft_badoption(argv[index.i][++index.j]);
+				return (-1);
 			}
 			if (index.k == 6)
 				return (-1);

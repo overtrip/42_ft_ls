@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/03 17:17:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/03 17:25:42 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/07 16:02:39 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void			ft_aff_file(int argc, char **argv, int start, int *option)
 		if (lstat(argv[start], info) == -1)
 		{
 			ft_error(argv[start]);
-			return ;
+			++start;
+			continue ;
 		}
 		if ((info->st_mode & S_IFMT) != S_IFDIR)
 		{

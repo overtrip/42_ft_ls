@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/03 17:21:00 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/07 16:06:22 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_cl	*ft_create_elem(struct stat *file, char *d_name)
 	return (new);
 }
 
-void	ft_print(t_cl *chain)
+void	ft_print(t_cl *chain, int option)
 {
 	if (chain)
 	{
-		if (LS_G)
+		if (option & LS_G)
 		{
 			ft_color(chain);
 			ft_putchar('\n');

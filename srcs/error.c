@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 15:36:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/03 17:05:15 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/07 16:10:54 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,10 @@ void	ft_error(char *name)
 		ft_putstr(message);
 	}
 }*/
+
+void	ft_badoption(char c)
+{
+	ft_putstr("ls: illegal option -- ");
+	ft_putchar(c);
+	ft_putendl("\nusage: ls [-GRalrt] [file ...]");
+}

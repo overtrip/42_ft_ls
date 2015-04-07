@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/03 17:24:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/07 16:03:44 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void				ft_sort_list(int option, t_cl *new, t_cl **chain);
 void				ft_aff_folder(char *d_name, int *option, t_max *save);
 void				ft_aff_file(int argc, char **argv, int start, int *option);
 void				ft_printl(t_cl *chain, t_max *save, int option);
-void				ft_print(t_cl *chain);
+void				ft_print(t_cl *chain, int option);
 void				ft_check(t_cl *chain, t_max *save, int option);
 void				ft_aff_list_files(int option, t_cl *chain, t_max *save);
 void				ft_search_date(struct timespec *time, int i);
@@ -139,5 +139,6 @@ void				ft_opt_ls_rec(t_cl *chain, t_max *save, int *option,
 		char *d_name);
 void				ft_sort_param_hub(int argc, char ***argv, int option,
 		int start);
+void				ft_badoption(char c);
 
 #endif
