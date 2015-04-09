@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:08:04 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/07 15:01:09 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/09 16:29:28 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,9 @@ static const t_flags	g_sf[] =
 	{S_IXOTH | S_ISVTX, 0, '-'}, {0, 0, 0}
 };
 
-/*void			ft_error(char *content, char *error)
-{
-	ft_putstr_fd("ls: ", 2);
-	ft_putstr_fd(content, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(error, 2);
-}*/
-
-void					ft_search_right(mode_t modes/*, char *path*/)
+void					ft_search_right(mode_t modes)
 {
 	int	i;
-	//size_t	ext;
 
 	i = 0;
 	while (g_sf[i].c != 0)

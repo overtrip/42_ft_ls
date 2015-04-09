@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/07 16:03:44 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/08 15:53:10 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void				ft_search_groups(gid_t gid, t_max *save);
 void				ft_search_user(uid_t uid, t_max *save);
 void				ft_search_link(nlink_t link, t_max *save);
 void				ft_putspace(int nb);
-void				ft_search_right(mode_t mode/*, char *path*/);
+void				ft_search_right(mode_t mode);
 void				ft_wright(int mask);
 void				ft_optionr(t_cl *chain, t_max *save,
 		int *option, char *path);
@@ -130,7 +130,7 @@ int					ft_ascii_cmp(char const *str1, char const *str2);
 void				ft_error(char *name);
 int					ft_putexit(char *str, char *tabc);
 void				ft_free_chain(t_cl *chain);
-void				ft_bad_permission(mode_t mode, char *name);
+void				ft_bad_permission(char *name);
 void				ft_color(t_cl *chain);
 int					ft_bfile(mode_t mode);
 void				ft_color_repertories(t_cl *chain);
@@ -139,6 +139,6 @@ void				ft_opt_ls_rec(t_cl *chain, t_max *save, int *option,
 		char *d_name);
 void				ft_sort_param_hub(int argc, char ***argv, int option,
 		int start);
-void				ft_badoption(char c);
+void				ft_badoption();
 
 #endif

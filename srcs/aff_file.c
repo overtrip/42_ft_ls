@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/03 17:17:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/07 16:02:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/08 15:53:31 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			ft_aff_folder2(t_cl *chain, char *name, int *option, t_max save)
 	ft_opt_ls_rec(chain, &save, option, name);
 }
 
-void			ft_aff_folder(char *d_name, int *option, t_max *save)
+void			ft_aff_folder(char *d_name, int *opt, t_max *save)
 {
 	DIR				*tmp;
 	struct dirent	*reading;
@@ -39,12 +39,13 @@ void			ft_aff_folder(char *d_name, int *option, t_max *save)
 				ft_error(reading->d_name);
 				return ;
 			}
-			ft_sort_list(*option, ft_create_elem(info, reading->d_name),
-					&chain);
+			ft_sort_list(*opt, ft_create_elem(info, reading->d_name), &chain);
 		}
-		ft_aff_folder2(chain, d_name, option, *save);
+		ft_aff_folder2(chain, d_name, opt, *save);
 		closedir(tmp);
 	}
+	else
+		ft_bad_permission(d_name);
 }
 
 void			ft_free_chain(t_cl *chain)

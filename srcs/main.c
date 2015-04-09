@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/07 16:10:21 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/09 16:29:32 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,37 @@ void			*ft_init_index(t_val *index)
 	return (index);
 }
 
+int				ft_get_option(char **argv, t_val index)
+{
+	const int	tab[6] = {LS_A, LS_REC, LS_REV, LS_L, LS_T, LS_G};
+	const char	tabc[7] = {'a', 'R', 'r', 'l', 't', 'G', '\0'};
+	int			ret;
+
+	ret = 0;
+	while (argv[index.i][++index.j])
+	{
+		index.k = -1;
+		while (tabc[++index.k])
+		{
+			if (tabc[index.k] == argv[index.i][index.j])
+			{
+				ret |= tab[index.k];
+				break ;
+			}
+		}
+		if (index.k == 6 || tabc[index.k] != argv[index.i][index.j])
+		{
+			ft_badoption();
+			return (-1);
+		}
+	}
+	return (ret);
+}
+
 int				ft_get_op(char **argv, int *start)
 {
-	const int		tab[6] = {LS_A, LS_REC, LS_REV, LS_L, LS_T, LS_G};
-	const char		tabc[7] = {'a', 'R', 'r', 'l', 't', 'G', '\0'};
-	t_val			index;
-	int				ret;
+	t_val	index;
+	int		ret;
 
 	ft_init_index(&index);
 	ret = 0;
@@ -41,25 +66,7 @@ int				ft_get_op(char **argv, int *start)
 			index.i++;
 			break ;
 		}
-		while (argv[index.i][++index.j])
-		{
-			index.k = -1;
-			while (tabc[++index.k])
-			{
-				if (tabc[index.k] == argv[index.i][index.j])
-				{
-					ret |= tab[index.k];
-					break ;
-				}
-			}
-			if (tabc[index.k] != argv[index.i][index.j])
-			{
-				ft_badoption(argv[index.i][++index.j]);
-				return (-1);
-			}
-			if (index.k == 6)
-				return (-1);
-		}
+		ret = ft_get_option(argv, index);
 		index.i++;
 	}
 	*start = index.i;

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/07 16:06:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/04/08 15:55:13 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_check(t_cl *chain, t_max *save, int option)
 	int		ret;
 
 	path = (chain->path != NULL) ? chain->path : chain->d_name;
-	ft_search_right(chain->file->st_mode/*, path*/);
+	ft_search_right(chain->file->st_mode);
 	ft_search_link(chain->file->st_nlink, save);
 	ft_search_user(chain->file->st_uid, save);
 	ft_search_groups(chain->file->st_gid, save);
