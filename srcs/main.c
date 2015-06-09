@@ -6,19 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/09 16:29:32 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/09 17:54:20 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void			*ft_init_index(t_val *index)
-{
-	index->i = 1;
-	index->j = 0;
-	index->k = 1;
-	return (index);
-}
 
 int				ft_get_option(char **argv, t_val index)
 {
@@ -90,6 +82,15 @@ void			ft_opt_ls_rec(t_cl *chain, t_max *save,
 	}
 }
 
+int				ft_arg_is_folder(char *path)
+{
+	struct stat		info;
+
+	if (lstat(path, &info) != 0)
+		return (0);
+	return (!((info.st_mode & S_IFMT) != S_IFDIR));
+}
+
 int				main(int argc, char **argv)
 {
 	int		res_opt;
@@ -111,7 +112,9 @@ int				main(int argc, char **argv)
 		res_opt |= ARG;
 	while (start < argc)
 	{
-		ft_aff_folder(argv[start++], &res_opt, &save);
+		if (ft_arg_is_folder(argv[start]))
+			ft_aff_folder(argv[start], &res_opt, &save);
+		++start;
 	}
 	return (0);
 }

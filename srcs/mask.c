@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:08:04 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/09 16:29:28 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/09 18:23:18 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static const t_flags	g_sf[] =
 	{S_IXOTH | S_ISVTX, 0, '-'}, {0, 0, 0}
 };
 
-void					ft_search_right(mode_t modes)
+void					ft_search_right(mode_t modes, ssize_t nb)
 {
 	int	i;
 
@@ -42,11 +42,10 @@ void					ft_search_right(mode_t modes)
 			ft_putchar(g_sf[i].c);
 		i++;
 	}
-/*	ext = listxattr(path, NULL, 0, XATTR_NOFOLLOW);
-	if (ext	> 0)
+	if (nb > 0)
 		ft_putchar('@');
 	else
-		ft_putchar(' ');*/
+		ft_putchar(' ');
 	ft_putchar(' ');
 }
 
@@ -69,6 +68,8 @@ void					ft_init(t_max *save)
 	save->suser = 0;
 	save->sgroup = 0;
 	save->ssize = 0;
+	save->major = 0;
+	save->minor = 0;
 }
 
 int						ft_bfile(mode_t mode)

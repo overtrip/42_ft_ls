@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/04/03 17:25:40 by jealonso         ###   ########.fr        #
+#    Updated: 2015/06/09 17:55:08 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRCS = \
 		comp_tri.c \
 		extention_1.c \
 		extention_2.c \
+		extention_3.c \
 		main.c \
 		mask.c \
 		sort_params.c \
@@ -57,7 +58,7 @@ $(NAME): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
 $(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HAED)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -ggdb -c -o $@ $<
 
 clean:
 	$(MAKE) -C $(LFTPATH) clean

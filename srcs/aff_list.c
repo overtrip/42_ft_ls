@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/03 17:06:28 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/08 14:44:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/09 17:29:34 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void			ft_aff_list(int option, t_cl *chain, t_max *save, char *path)
 		}
 		if (option & LS_L)
 		{
-			chain->maxmin = 0;
 			ft_save_val(chain, save, option);
 			if (ft_printable(option, chain))
 				ft_print_total(save);
@@ -69,19 +68,9 @@ void			ft_aff_list_files(int option, t_cl *chain, t_max *save)
 		if (option & LS_A || chain->d_name[0] != '.')
 		{
 			if (option & LS_L)
-			{
-				if (option & LS_G)
-					ft_color(chain);
-				else
-					ft_printl(chain, save, option);
-			}
+				ft_printl(chain, save, option);
 			else
-			{
-				if (option & LS_G)
-					ft_color(chain);
-				else
-					ft_print(chain, option);
-			}
+				ft_print(chain, option);
 		}
 		chain = chain->next;
 	}

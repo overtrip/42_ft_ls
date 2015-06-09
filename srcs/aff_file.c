@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/03 17:17:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/08 15:53:31 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/08 18:34:35 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void			ft_aff_folder(char *d_name, int *opt, t_max *save)
 			if (!(info = (struct stat *)malloc(sizeof(struct stat))))
 				return ;
 			if (lstat(ft_joinpath(reading->d_name, d_name), info) == -1)
-			{
 				ft_error(reading->d_name);
+			if (lstat(ft_joinpath(reading->d_name, d_name), info) == -1)
 				return ;
-			}
-			ft_sort_list(*opt, ft_create_elem(info, reading->d_name), &chain);
+			ft_sort_list(*opt, ft_create_elem(info, reading->d_name,
+						ft_joinpath(reading->d_name, d_name)), &chain);
 		}
 		ft_aff_folder2(chain, d_name, opt, *save);
 		closedir(tmp);
@@ -78,13 +78,13 @@ void			ft_aff_file(int argc, char **argv, int start, int *option)
 			return ;
 		if (lstat(argv[start], info) == -1)
 		{
-			ft_error(argv[start]);
-			++start;
+			ft_error(argv[start++]);
 			continue ;
 		}
 		if ((info->st_mode & S_IFMT) != S_IFDIR)
 		{
-			ft_sort_list(*option, ft_create_elem(info, argv[start]), &chain);
+			ft_sort_list(*option, ft_create_elem(info, argv[start]
+						, ft_strdup(argv[start])), &chain);
 			*option &= ~(FIRST_ARG);
 		}
 		++start;

@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/08 15:53:10 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/09 18:12:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct		s_max
 	unsigned int	suser;
 	unsigned int	sgroup;
 	unsigned int	ssize;
+	int				minor;
+	int				major;
 }					t_max;
 
 typedef struct		s_cl
@@ -73,7 +75,7 @@ typedef struct		s_cl
 	char			*d_name;
 	struct stat		*file;
 	char			*path;
-	int				maxmin;
+
 }					t_cl;
 
 typedef struct		s_val
@@ -90,7 +92,7 @@ typedef struct		s_flags
 	char			c;
 }					t_flags;
 
-t_cl				*ft_create_elem(struct stat *file, char *d_name);
+t_cl				*ft_create_elem(struct stat *file, char *d_nam, char *path);
 void				ft_sort_cl(t_cl **begin, t_cl *new,
 		int (*ft_comp)(t_cl *, t_cl *));
 int					ft_comp_name(t_cl *file1, t_cl *file2);
@@ -114,7 +116,7 @@ void				ft_search_groups(gid_t gid, t_max *save);
 void				ft_search_user(uid_t uid, t_max *save);
 void				ft_search_link(nlink_t link, t_max *save);
 void				ft_putspace(int nb);
-void				ft_search_right(mode_t mode);
+void				ft_search_right(mode_t mode, ssize_t nb);
 void				ft_wright(int mask);
 void				ft_optionr(t_cl *chain, t_max *save,
 		int *option, char *path);
@@ -140,5 +142,8 @@ void				ft_opt_ls_rec(t_cl *chain, t_max *save, int *option,
 void				ft_sort_param_hub(int argc, char ***argv, int option,
 		int start);
 void				ft_badoption();
-
+void				ft_search_t(unsigned int nb_maj, unsigned int nb_min
+		, t_max *save);
+void				ft_print_link(t_cl *chain);
+void				*ft_init_index(t_val *index);
 #endif
