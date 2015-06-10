@@ -6,17 +6,11 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/05 15:36:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/04/08 15:54:39 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/10 18:21:37 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-void	ft_write_msg(char c)
-{
-	write(2, &c, 4);
-	write(1, "\n", 1);
-}
 
 void	ft_error(char *name)
 {
@@ -29,13 +23,13 @@ void	ft_error(char *name)
 
 void	ft_bad_permission(char *name)
 {
-	ft_putstr("\nls: ");
-	ft_putstr(name);
-	ft_putendl(": Permission denied");
+	ft_putstr_fd("\nft_ls: ", 2);
+	ft_putstr_fd(name, 2);
+	ft_putendl_fd(": Permission denied", 2);
 }
 
 void	ft_badoption(void)
 {
-	ft_putstr("ls: illegal option ");
-	ft_putendl("\nusage: ls [-GRalrt] [file ...]");
+	ft_putstr_fd("ft_ls: illegal option ", 2);
+	ft_putendl_fd("\nusage: ls [-GRalrt] [file ...]", 2);
 }
