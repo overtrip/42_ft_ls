@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/09 16:51:42 by jealonso          #+#    #+#              #
-#    Updated: 2015/03/13 18:51:14 by jealonso         ###   ########.fr        #
+#    Updated: 2015/06/10 17:50:01 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ ft_putendl.c \
 ft_putendl_fd.c \
 ft_putnbr.c \
 ft_putnbr_fd.c \
+ft_putnbr_long.c \
 ft_putstr.c \
 ft_putstr_fd.c \
 ft_strcat.c \

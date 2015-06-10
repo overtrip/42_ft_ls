@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/10 17:18:27 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/10 17:51:45 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ int				main(int argc, char **argv)
 	start = 1;
 	if ((res_opt = ft_get_op(argv, &start)) == -1)
 		return (-1);
-	ft_putnbr(res_opt);
-	ft_putchar('\n');
 	res_opt |= FIRST_ARG;
 	ft_sort_param_hub(argc, &argv, res_opt, start);
 	if (start == argc)
