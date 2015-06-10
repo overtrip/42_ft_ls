@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:06:50 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/10 18:01:47 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/10 18:41:38 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,23 @@ void	ft_search_user(t_cl *chain, t_max *save)
 	ft_putstr("  ");
 }
 
-void	ft_search_groups(gid_t gid, t_max *save)
+void	ft_search_groups(t_cl *chain, t_max *save)
 {
 	struct group	*f;
+	gid_t			gid;
 
+	gid = chain->file->st_gid;
 	f = getgrgid(gid);
-	ft_putstr(f->gr_name);
-	if (ft_strlen(f->gr_name) < save->sgroup)
+	if (f)
+	{
+		ft_putstr(f->gr_name);
 		ft_putspace(save->sgroup - ft_strlen(f->gr_name));
+	}
+	else
+	{
+		ft_putnbr(gid);
+		ft_putspace(save->suser - ft_cmp_char(gid));
+	}
 	ft_putstr("  ");
 }
 

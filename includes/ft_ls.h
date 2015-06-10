@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/18 11:10:53 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/10 17:47:55 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/10 18:41:36 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void				ft_check(t_cl *chain, t_max *save, int option);
 void				ft_aff_list_files(int option, t_cl *chain, t_max *save);
 void				ft_search_date(struct timespec *time, int i);
 void				ft_search_size(off_t size, t_max *save);
-void				ft_search_groups(gid_t gid, t_max *save);
+void				ft_search_groups(t_cl *chain, t_max *save);
 void				ft_search_user(t_cl *chain, t_max *save);
 void				ft_search_link(nlink_t link, t_max *save);
 void				ft_putspace(int nb);

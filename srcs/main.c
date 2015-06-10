@@ -6,13 +6,13 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/10 17:51:45 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/10 18:43:08 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int				ft_get_option(char **argv, t_val index, int	*ret)
+int				ft_get_option(char **argv, t_val index, int *ret)
 {
 	const int	tab[6] = {LS_A, LS_REC, LS_REV, LS_L, LS_T, LS_G};
 	const char	tabc[7] = {'a', 'R', 'r', 'l', 't', 'G', '\0'};
