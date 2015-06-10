@@ -6,7 +6,7 @@
 #    By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/01/25 15:08:49 by jealonso          #+#    #+#              #
-#    Updated: 2015/06/09 17:55:08 by jealonso         ###   ########.fr        #
+#    Updated: 2015/06/09 19:30:25 by jealonso         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ all: $(OBJSPATH) $(LIBFT) $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $^
 
-$(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HAED)
+$(OBJSPATH)/%.o: $(SRCSPATH)/%.c $(HEAD)
 	$(CC) $(CFLAGS) -ggdb -c -o $@ $<
 
 clean:

@@ -6,19 +6,17 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/11 17:36:17 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/09 17:54:20 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/10 17:18:27 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-int				ft_get_option(char **argv, t_val index)
+int				ft_get_option(char **argv, t_val index, int	*ret)
 {
 	const int	tab[6] = {LS_A, LS_REC, LS_REV, LS_L, LS_T, LS_G};
 	const char	tabc[7] = {'a', 'R', 'r', 'l', 't', 'G', '\0'};
-	int			ret;
 
-	ret = 0;
 	while (argv[index.i][++index.j])
 	{
 		index.k = -1;
@@ -26,7 +24,7 @@ int				ft_get_option(char **argv, t_val index)
 		{
 			if (tabc[index.k] == argv[index.i][index.j])
 			{
-				ret |= tab[index.k];
+				*ret |= tab[index.k];
 				break ;
 			}
 		}
@@ -36,7 +34,7 @@ int				ft_get_option(char **argv, t_val index)
 			return (-1);
 		}
 	}
-	return (ret);
+	return (*ret);
 }
 
 int				ft_get_op(char **argv, int *start)
@@ -50,7 +48,7 @@ int				ft_get_op(char **argv, int *start)
 	{
 		if (!argv[index.i++][1])
 			continue ;
-		index.i--;
+		--index.i;
 		if (argv[index.i][1] == '-' && argv[index.i][2])
 			return (-1);
 		if (argv[index.i][1] == '-' && !argv[index.i][2])
@@ -58,7 +56,7 @@ int				ft_get_op(char **argv, int *start)
 			index.i++;
 			break ;
 		}
-		ret = ft_get_option(argv, index);
+		ft_get_option(argv, index, &ret);
 		index.i++;
 	}
 	*start = index.i;
@@ -100,6 +98,8 @@ int				main(int argc, char **argv)
 	start = 1;
 	if ((res_opt = ft_get_op(argv, &start)) == -1)
 		return (-1);
+	ft_putnbr(res_opt);
+	ft_putchar('\n');
 	res_opt |= FIRST_ARG;
 	ft_sort_param_hub(argc, &argv, res_opt, start);
 	if (start == argc)

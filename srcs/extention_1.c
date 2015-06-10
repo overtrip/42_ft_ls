@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:07:37 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/09 17:59:07 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/09 18:54:49 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ void	ft_check(t_cl *chain, t_max *save, int option)
 	if (!(((chain->file->st_mode & S_IFMT) == S_IFBLK)
 				|| ((chain->file->st_mode & S_IFMT) == S_IFCHR)))
 		ft_search_size(chain->file->st_size, save);
-	ft_search_t(major(chain->file->st_rdev), minor(chain->file->st_rdev), save);
+	else
+		ft_search_t(major(chain->file->st_rdev)
+				, minor(chain->file->st_rdev), save);
 	ft_search_date(&(chain->file->st_mtimespec), 0);
 	if (option & LS_G)
 		ft_color(chain);

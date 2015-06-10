@@ -6,7 +6,7 @@
 /*   By: jealonso <jealonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/24 19:04:07 by jealonso          #+#    #+#             */
-/*   Updated: 2015/06/09 17:52:22 by jealonso         ###   ########.fr       */
+/*   Updated: 2015/06/09 19:56:29 by jealonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,18 @@ unsigned int		ft_cmp_char(unsigned long nb)
 }
 
 void				ft_save_val2(struct stat a, t_max *save,
-									struct passwd f, struct group g)
+									struct passwd *f, struct group *g)
 {
 	if (a.st_nlink > save->slink)
 		save->slink = a.st_nlink;
-	if (ft_strlen(f.pw_name) > save->suser)
-		save->suser = ft_strlen(f.pw_name);
-	if (ft_strlen(g.gr_name) > save->sgroup)
-		save->sgroup = ft_strlen(g.gr_name);
+	if (f && (ft_strlen(f->pw_name) > save->suser))
+		save->suser = ft_strlen(f->pw_name);
+	else if (ft_cmp_char(a.st_uid) > save->suser)
+		save->suser = 10;
+	if (g && ft_strlen(g->gr_name) > save->sgroup)
+		save->sgroup = ft_strlen(g->gr_name);
+	else if (ft_cmp_char(a.st_gid) > save->sgroup)
+		save->sgroup = 10;
 	if (ft_cmp_char(a.st_size) > save->ssize)
 		save->ssize = ft_cmp_char(a.st_size);
 	if (major(a.st_rdev) > save->major)
@@ -52,7 +56,7 @@ void				ft_save_val(t_cl *chain, t_max *save, int option)
 		if ((option & LS_A) || (!(option & LS_A) && chain->d_name[0] != '.'))
 		{
 			a = chain->file;
-			ft_save_val2(*a, save, *f, *g);
+			ft_save_val2(*a, save, f, g);
 			if (option & LS_A)
 				save->sblock += a->st_blocks;
 			else if (chain->d_name[0] != '.')
